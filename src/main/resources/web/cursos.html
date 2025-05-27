@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gerenciar Cursos - Sistema Escola</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+    <nav aria-label="Navegação principal">
+        <h1>Gerenciar Cursos</h1>
+        <a href="index.html" class="btn btn-secondary" role="button" aria-label="Voltar para página inicial">← Voltar</a>
+    </nav>
+</header>
+
+<main>
+    <section aria-labelledby="titulo-cadastro-curso" class="form-section">
+        <h2 id="titulo-cadastro-curso">Cadastrar Novo Curso</h2>
+        <form id="cadastroCursoForm" aria-describedby="formCursoMsg" novalidate>
+            <div class="form-group">
+                <label for="nomeCurso">Nome do Curso</label>
+                <input type="text" id="nomeCurso" name="nomeCurso" required aria-required="true" placeholder="Digite o nome do curso" />
+            </div>
+
+            <div class="form-group">
+                <label for="descricaoCurso">Descrição</label>
+                <textarea id="descricaoCurso" name="descricaoCurso" rows="4" placeholder="Descrição do curso" required aria-required="true"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar Curso</button>
+        </form>
+        <div id="formCursoMsg" role="alert" aria-live="polite" class="message"></div>
+    </section>
+
+    <section aria-labelledby="titulo-lista-cursos" class="list-section">
+        <h2 id="titulo-lista-cursos">Cursos Cadastrados</h2>
+        <button id="btnListarCursos" class="btn btn-secondary" aria-label="Listar todos os cursos cadastrados">Listar Cursos</button>
+
+        <div class="table-responsive">
+            <table id="tabelaCursos" aria-describedby="tabelaCursosDescricao" class="table">
+                <caption id="tabelaCursosDescricao">Lista de cursos cadastrados no sistema</caption>
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome do Curso</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Cursos serão inseridos aqui dinamicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="listaCursosMsg" role="alert" aria-live="polite" class="message"></div>
+    </section>
+</main>
+
+<script src="js/cursos.js"></script>
+</body>
+</html>
