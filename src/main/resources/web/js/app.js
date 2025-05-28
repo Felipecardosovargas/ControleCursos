@@ -1,108 +1,110 @@
-const API_BASE_URL = 'http://localhost:8080/api'; // Ensure this matches your server port
+const apiUrl = "http://localhost:8080/api/alunos";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cadastroAlunoForm = document.getElementById('cadastroAlunoForm');
-    const btnListarAlunos = document.getElementById('btnListarAlunos');
-    const tabelaAlunosBody = document.querySelector('#tabelaAlunos tbody');
-    const alunoMessage = document.getElementById('alunoMessage');
+// Define o max da data de nascimento como hoje
+document.addEventListener("DOMContentLoaded", () => {
+    const hoje = new Date().toISOString().split("T")[0];
+    document.getElementById("dataNascimento").setAttribute("max", hoje);
+});
 
-    if (cadastroAlunoForm) {
-        cadastroAlunoForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const dataNascimento = document.getElementById('dataNascimento').value;
+// Mensagens de feedback
+const formMsg = document.getElementById("formAlunoMsg");
+const listaMsg = document.getElementById("listaAlunosMsg");
 
-            try {
-                const response = await fetch(`${API_BASE_URL}/alunos`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome, email, dataNascimento })
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    alunoMessage.textContent = `Aluno ${result.nome} cadastrado com ID: ${result.id}`;
-                    alunoMessage.className = 'success';
-                    cadastroAlunoForm.reset();
-                    if (btnListarAlunos) listarAlunos(); // Refresh list
-                } else {
-                    alunoMessage.textContent = `Erro: ${result.error || response.statusText}`;
-                    alunoMessage.className = 'error';
-                }
-            } catch (error) {
-                alunoMessage.textContent = `Erro de conexão: ${error.message}`;
-                alunoMessage.className = 'error';
-                console.error("Erro ao cadastrar aluno:", error);
-            }
-        });
-    }
+// Função para mostrar mensagens
+function mostrarMensagem(msg, elemento) {
+    elemento.textContent = msg;
+    setTimeout(() => elemento.textContent = "", 4000);
+}
 
-    if (btnListarAlunos) {
-        btnListarAlunos.addEventListener('click', listarAlunos);
-        listarAlunos(); // Load initially if on alunos.html
-    }
+// Carregar alunos
+async function carregarAlunos() {
+    try {
+        const res = await fetch(apiUrl);
+        const alunos = await res.json();
 
-    async function listarAlunos() {
-        if (!tabelaAlunosBody) return;
-        try {
-            const response = await fetch(`${API_BASE_URL}/alunos`);
-            if (!response.ok) {
-                const errorResult = await response.json().catch(() => ({ error: response.statusText }));
-                console.error("Erro ao listar alunos:", errorResult.error);
-                tabelaAlunosBody.innerHTML = `<tr><td colspan="5">Erro ao carregar alunos: ${errorResult.error}</td></tr>`;
-                return;
-            }
-            const alunos = await response.json();
-            tabelaAlunosBody.innerHTML = ''; // Clear existing rows
-            if (alunos.length === 0) {
-                tabelaAlunosBody.innerHTML = `<tr><td colspan="5">Nenhum aluno cadastrado.</td></tr>`;
-            } else {
-                alunos.forEach(aluno => {
-                    const row = tabelaAlunosBody.insertRow();
-                    row.innerHTML = `
-                        <td>${aluno.id}</td>
-                        <td>${aluno.nome}</td>
-                        <td>${aluno.email}</td>
-                        <td>${aluno.dataNascimento}</td>
-                        <td>
-                            <button onclick="editarAluno(${aluno.id})">Editar</button>
-                            <button onclick="deletarAluno(${aluno.id}, '${aluno.nome}')">Deletar</button>
-                        </td>
-                    `;
-                });
-            }
-        } catch (error) {
-            console.error("Erro ao listar alunos:", error);
-            tabelaAlunosBody.innerHTML = `<tr><td colspan="5">Erro de conexão ao carregar alunos.</td></tr>`;
+        const tbody = document.querySelector("#tabelaAlunos tbody");
+        tbody.innerHTML = "";
+
+        if (alunos.length === 0) {
+            mostrarMensagem("Nenhum aluno encontrado.", listaMsg);
+            return;
         }
+
+        alunos.forEach(aluno => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${aluno.id}</td>
+                <td>${aluno.nome}</td>
+                <td>${aluno.email}</td>
+                <td>${aluno.dataNascimento}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="excluirAluno(${aluno.id})" aria-label="Excluir aluno ${aluno.nome}">Excluir</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    } catch (err) {
+        mostrarMensagem("Erro ao carregar alunos.", listaMsg);
+        console.error(err);
+    }
+}
+
+// Cadastrar novo aluno
+document.getElementById("cadastroAlunoForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const aluno = {
+        nome: document.getElementById("nome").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        dataNascimento: document.getElementById("dataNascimento").value
+    };
+
+    if (!aluno.nome || !aluno.email || !aluno.dataNascimento) {
+        mostrarMensagem("Preencha todos os campos corretamente.", formMsg);
+        return;
+    }
+
+    try {
+        const res = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(aluno)
+        });
+
+        if (res.ok) {
+            mostrarMensagem("Aluno cadastrado com sucesso!", formMsg);
+            e.target.reset();
+            carregarAlunos();
+        } else {
+            const erro = await res.text();
+            mostrarMensagem(`Erro ao cadastrar aluno: ${erro}`, formMsg);
+        }
+    } catch (err) {
+        mostrarMensagem("Erro ao se comunicar com o servidor.", formMsg);
+        console.error(err);
     }
 });
 
-// Placeholder functions for edit/delete - these would open modals or redirect
-async function editarAluno(id) {
-    // Fetch aluno data, populate a form, then send PUT request
-    alert(`Editar aluno ID: ${id} (implementação pendente)`);
-    // Example: const nome = prompt("Novo nome:", aluno.nome);
-    // if (nome) { /* make PUT request */ }
-}
+// Botão "Listar Alunos"
+document.getElementById("btnListarAlunos").addEventListener("click", carregarAlunos);
 
-async function deletarAluno(id, nome) {
-    if (confirm(`Tem certeza que deseja deletar o aluno ${nome} (ID: ${id})?`)) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/alunos/${id}`, { method: 'DELETE' });
-            const result = await response.json().catch(() => ({})); // Handle empty response for 204
+// Função para excluir aluno
+async function excluirAluno(id) {
+    if (!confirm("Tem certeza que deseja excluir este aluno?")) return;
 
-            if (response.ok || response.status === 204) {
-                alert(`Aluno ${nome} deletado com sucesso.`);
-                document.querySelector('#btnListarAlunos')?.click(); // Refresh list
-            } else {
-                alert(`Erro ao deletar aluno: ${result.error || response.statusText}`);
-            }
-        } catch (error) {
-            alert(`Erro de conexão ao deletar aluno: ${error.message}`);
-            console.error("Erro ao deletar aluno:", error);
+    try {
+        const res = await fetch(`${apiUrl}/${id}`, {
+            method: "DELETE"
+        });
+
+        if (res.ok) {
+            mostrarMensagem("Aluno excluído com sucesso!", listaMsg);
+            carregarAlunos();
+        } else {
+            mostrarMensagem("Erro ao excluir aluno.", listaMsg);
         }
+    } catch (err) {
+        mostrarMensagem("Erro ao se comunicar com o servidor.", listaMsg);
+        console.error(err);
     }
 }
-
-// Add similar JS functions for Cursos and Matrículas on their respective pages.
