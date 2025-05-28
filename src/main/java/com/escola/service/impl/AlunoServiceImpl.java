@@ -120,7 +120,7 @@ public class AlunoServiceImpl implements AlunoService {
             if (!EMAIL_PATTERN.matcher(email).matches()) {
                 throw new ValidacaoException("Novo email inválido.");
             }
-            // Check if new email is already taken by another student
+            // Check if a new email is already taken by another student
             Optional<Aluno> alunoComNovoEmail = alunoRepository.buscarPorEmail(email);
             if (alunoComNovoEmail.isPresent() && !alunoComNovoEmail.get().getId().equals(id)) {
                 throw new ValidacaoException("Novo email '" + email + "' já está em uso por outro aluno.");
@@ -148,7 +148,7 @@ public class AlunoServiceImpl implements AlunoService {
         Aluno aluno = alunoRepository.buscarPorId(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Aluno não encontrado com ID: " + id + " para deleção."));
 
-        // Business Rule: Check if student has any enrollments before deleting
+        // Business Rule: Check if a student has any enrollments before deleting
         // This requires a method in MatriculaRepository like: countByAlunoId(Long alunoId)
         // For simplicity, assume MatriculaRepository has a method like `findByAlunoId`
         // long countMatriculas = matriculaRepository.listarPorAlunoId(id).size(); // Example

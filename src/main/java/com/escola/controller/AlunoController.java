@@ -46,7 +46,7 @@ public class AlunoController implements HttpHandler {
         int statusCode = 200;
 
         try {
-            // Enable CORS for local development if frontend is served from a different port
+            // Enable CORS for local development if the frontend is served from a different port
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
             exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type,Authorization");
@@ -60,7 +60,7 @@ public class AlunoController implements HttpHandler {
                 if ("POST".equalsIgnoreCase(method)) {
                     // Create Aluno
                     InputStream requestBody = exchange.getRequestBody();
-                    // A DTO for request might be better here, e.g. AlunoCreateRequestDTO
+                    // A DTO for request might be better here, e.g., AlunoCreateRequestDTO
                     AlunoDTO requestDTO = JsonMapper.fromJson(new String(requestBody.readAllBytes(), StandardCharsets.UTF_8), AlunoDTO.class); // Simplified
                     AlunoDTO createdAluno = alunoService.criarAluno(requestDTO.getNome(), requestDTO.getEmail(), requestDTO.getDataNascimento());
                     responseBody = JsonMapper.toJson(createdAluno);
