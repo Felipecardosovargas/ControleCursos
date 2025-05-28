@@ -1,32 +1,34 @@
 package com.escola.dto;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
- * Data Transfer Object for {@link com.escola.model.Aluno}.
- * Used to transfer student data, typically between the service layer and the
- * controller or presentation layer. This helps to decouple the domain model
- * from the exposure layer and can be tailored for specific use cases.
- * This class is declared as final as it is a simple data carrier.
+ * Data Transfer Object representing a Student (Aluno).
+ * This class is used to transfer student data between different layers of the application.
+ * It follows the Single Responsibility Principle by only holding data and no business logic.
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @author
  */
-public final class AlunoDTO { // DTOs can be final
+public class AlunoDTO {
 
-    private final Long id;
-    private final String nome;
-    private final String email;
-    private final LocalDate dataNascimento;
+    private Long id;
+    private String nome;
+    private String email;
+    private LocalDate dataNascimento;
 
     /**
-     * Constructs an AlunoDTO.
+     * Default constructor.
+     */
+    public AlunoDTO() {
+    }
+
+    /**
+     * Parameterized constructor to initialize all fields.
      *
-     * @param id The ID of the student.
-     * @param nome The name of the student.
-     * @param email The email of the student.
-     * @param dataNascimento The date of birth of the student.
+     * @param id              the unique identifier of the student
+     * @param nome            the name of the student
+     * @param email           the email of the student
+     * @param dataNascimento  the birth date of the student
      */
     public AlunoDTO(Long id, String nome, String email, LocalDate dataNascimento) {
         this.id = id;
@@ -35,24 +37,83 @@ public final class AlunoDTO { // DTOs can be final
         this.dataNascimento = dataNascimento;
     }
 
-    // Only getters as DTOs are often immutable or primarily for reading
-
+    /**
+     * Gets the student ID.
+     *
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets the student ID.
+     *
+     * @param id the unique identifier to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the student name.
+     *
+     * @return the name
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Sets the student name.
+     *
+     * @param nome the name to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * Gets the student email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets the student email.
+     *
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Gets the student's date of birth.
+     *
+     * @return the date of birth
+     */
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
+    /**
+     * Sets the student's date of birth.
+     *
+     * @param dataNascimento the date of birth to set
+     */
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    /**
+     * Returns a string representation of the student.
+     *
+     * @return formatted string containing student information
+     */
     @Override
     public String toString() {
         return "AlunoDTO{" +
@@ -61,21 +122,5 @@ public final class AlunoDTO { // DTOs can be final
                 ", email='" + email + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AlunoDTO alunoDTO = (AlunoDTO) o;
-        return Objects.equals(id, alunoDTO.id) &&
-                Objects.equals(nome, alunoDTO.nome) &&
-                Objects.equals(email, alunoDTO.email) &&
-                Objects.equals(dataNascimento, alunoDTO.dataNascimento);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, email, dataNascimento);
     }
 }
