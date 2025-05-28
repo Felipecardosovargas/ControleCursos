@@ -3,28 +3,33 @@ package com.escola.dto;
 import java.util.Objects;
 
 /**
- * Data Transfer Object for {@link com.escola.model.Curso}.
- * Used to transfer course data between application layers, particularly
- * from the service layer to the controller/presentation layer.
- * This class is declared as final as it is a simple data carrier.
+ * Data Transfer Object representing a Course (Curso).
+ * Used to transfer course data between different layers of the application.
+ * This class holds data and no business logic.
  *
- * @version 1.0
  * @author SeuNomeAqui
+ * @version 1.0
  */
-public final class CursoDTO {
+public class CursoDTO {
 
-    private final Long id;
-    private final String nome;
-    private final String descricao;
-    private final int cargaHoraria;
+    private Long id;
+    private String nome;
+    private String descricao;
+    private int cargaHoraria;
 
     /**
-     * Constructs a CursoDTO.
+     * Default constructor.
+     */
+    public CursoDTO() {
+    }
+
+    /**
+     * Parameterized constructor to initialize all fields.
      *
-     * @param id The unique identifier of the course.
-     * @param nome The name of the course.
-     * @param descricao A description of the course.
-     * @param cargaHoraria The workload of the course in hours.
+     * @param id           the unique identifier of the course
+     * @param nome         the name of the course
+     * @param descricao    a description of the course
+     * @param cargaHoraria the workload of the course in hours
      */
     public CursoDTO(Long id, String nome, String descricao, int cargaHoraria) {
         this.id = id;
@@ -33,28 +38,44 @@ public final class CursoDTO {
         this.cargaHoraria = cargaHoraria;
     }
 
-    // Getters
+    // Getters and Setters
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getDescricao() {
         return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public int getCargaHoraria() {
         return cargaHoraria;
     }
 
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CursoDTO)) return false;
         CursoDTO cursoDTO = (CursoDTO) o;
         return cargaHoraria == cursoDTO.cargaHoraria &&
                 Objects.equals(id, cursoDTO.id) &&

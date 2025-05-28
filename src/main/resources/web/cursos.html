@@ -28,6 +28,11 @@
                 <textarea id="descricaoCurso" name="descricaoCurso" rows="4" placeholder="Descrição do curso" required aria-required="true"></textarea>
             </div>
 
+            <div class="form-group">
+                <label for="cargaHorariaCurso">Carga Horária (horas)</label>
+                <input type="number" id="cargaHorariaCurso" name="cargaHorariaCurso" min="1" required aria-required="true" placeholder="Informe a carga horária" />
+            </div>
+
             <button type="submit" class="btn btn-primary">Salvar Curso</button>
         </form>
         <div id="formCursoMsg" role="alert" aria-live="polite" class="message"></div>
@@ -45,7 +50,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome do Curso</th>
                     <th scope="col">Descrição</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Carga Horária</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,7 +62,6 @@
         <div id="listaCursosMsg" role="alert" aria-live="polite" class="message"></div>
     </section>
 </main>
-
 <script src="js/cursos.js"></script>
 </body>
 </html>
