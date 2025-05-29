@@ -1,17 +1,18 @@
 package com.escola.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Utility class for JSON serialization and deserialization using Jackson.
  * This class is final as it only contains static utility methods.
  *
  * @version 1.0
- * @author SeuNomeAqui
  */
 public final class JsonMapper {
     private static final ObjectMapper objectMapper = createObjectMapper();
@@ -21,8 +22,7 @@ public final class JsonMapper {
     private static ObjectMapper createObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule()); // For Java 8 Date/Time types like LocalDate
-        // Configure other settings if needed, e.g., date formats
-        // mapper.disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        // mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return mapper;
     }
 
@@ -41,8 +41,8 @@ public final class JsonMapper {
      * Deserializes a JSON string to an object of the specified class.
      *
      * @param jsonString The JSON string to deserialize.
-     * @param clazz The class of the object to create.
-     * @param <T> The type of the object.
+     * @param clazz      The class of the object to create.
+     * @param <T>        The type of the object.
      * @return The deserialized object.
      * @throws IOException if an error occurs during deserialization.
      */
@@ -50,4 +50,16 @@ public final class JsonMapper {
         return objectMapper.readValue(jsonString, clazz);
     }
 
+    /**
+     * Deserializes a JSON array string into a list of specified type.
+     *
+     * @param jsonArray The JSON array string.
+     * @param clazz     The class of the elements in the list.
+     * @param <T>       The type of the elements.
+     * @return A list of deserialized objects.
+     * @throws IOException if an error occurs during deserialization.
+     */
+    public static <T> List<T> fromJsonList(String jsonArray, Class<T> clazz) throws IOException {
+        return objectMapper.readValue(jsonArray, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+    }
 }
