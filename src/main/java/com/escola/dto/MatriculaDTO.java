@@ -1,38 +1,58 @@
-
 package com.escola.dto;
 
 import com.escola.model.Matricula;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Data Transfer Object for {@link com.escola.model.Matricula}.
- * Used to transfer enrollment data, often including denormalized information
- * like student and course names for ease of display.
- * This class is declared as final as it is a simple data carrier.
+ * Data Transfer Object (DTO) representing an Enrollment (Matricula).
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * <p>
+ * Este DTO encapsula os dados de uma matrícula entre aluno e curso,
+ * facilitando o transporte de dados entre as camadas da aplicação
+ * sem expor diretamente as entidades do domínio.
+ * </p>
+ *
+ * <p>
+ * Contém dados desnormalizados como nome do aluno e nome do curso para facilitar
+ * exibição em camadas de apresentação.
+ * </p>
+ *
+ * <p><b>Exemplo de uso:</b></p>
+ * <pre>{@code
+ * MatriculaDTO dto = new MatriculaDTO(matricula);
+ * }</pre>
+ *
+ * @author SeuNome
+ * @version 1.1
+ * @since 1.0
  */
-public final class MatriculaDTO {
+public class MatriculaDTO implements Serializable {
 
-    private final Long id;
-    private final String alunoNome; // Denormalized data
-    private final Long alunoId;
-    private final String cursoNome; // Denormalized data
-    private final Long cursoId;
-    private final LocalDate dataMatricula;
+    private Long id;
+    private Long alunoId;
+    private String alunoNome;
+    private Long cursoId;
+    private String cursoNome;
+    private LocalDate dataMatricula;
 
     /**
-     * Constructs a MatriculaDTO.
+     * Construtor padrão sem argumentos.
+     */
+    public MatriculaDTO() {
+    }
+
+    /**
+     * Construtor com todos os atributos.
      *
-     * @param id The unique identifier of the enrollment.
-     * @param alunoId The ID of the enrolled student.
-     * @param alunoNome The name of the enrolled student.
-     * @param cursoId The ID of the course.
-     * @param cursoNome The name of the course.
-     * @param dataMatricula The date of enrollment.
+     * @param id            Identificador único da matrícula.
+     * @param alunoId       Identificador do aluno.
+     * @param alunoNome     Nome completo do aluno.
+     * @param cursoId       Identificador do curso.
+     * @param cursoNome     Nome do curso.
+     * @param dataMatricula Data em que a matrícula foi realizada.
      */
     public MatriculaDTO(Long id, Long alunoId, String alunoNome, Long cursoId, String cursoNome, LocalDate dataMatricula) {
         this.id = id;
@@ -43,6 +63,11 @@ public final class MatriculaDTO {
         this.dataMatricula = dataMatricula;
     }
 
+    /**
+     * Constrói uma instância de {@code MatriculaDTO} com base na entidade {@link Matricula}.
+     *
+     * @param matricula Entidade de matrícula do domínio.
+     */
     public MatriculaDTO(Matricula matricula) {
         this.id = matricula.getId();
         this.alunoId = matricula.getAluno().getId();
@@ -52,36 +77,62 @@ public final class MatriculaDTO {
         this.dataMatricula = matricula.getDataMatricula();
     }
 
-    // Getters
+    // === Getters e Setters ===
 
     public Long getId() {
         return id;
     }
 
-    public String getAlunoNome() {
-        return alunoNome;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getAlunoId() {
         return alunoId;
     }
 
-    public String getCursoNome() {
-        return cursoNome;
+    public void setAlunoId(Long alunoId) {
+        this.alunoId = alunoId;
+    }
+
+    public String getAlunoNome() {
+        return alunoNome;
+    }
+
+    public void setAlunoNome(String alunoNome) {
+        this.alunoNome = alunoNome;
     }
 
     public Long getCursoId() {
         return cursoId;
     }
 
+    public void setCursoId(Long cursoId) {
+        this.cursoId = cursoId;
+    }
+
+    public String getCursoNome() {
+        return cursoNome;
+    }
+
+    public void setCursoNome(String cursoNome) {
+        this.cursoNome = cursoNome;
+    }
+
     public LocalDate getDataMatricula() {
         return dataMatricula;
     }
 
+    public void setDataMatricula(LocalDate dataMatricula) {
+        this.dataMatricula = dataMatricula;
+    }
+
+    // === equals, hashCode e toString ===
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof MatriculaDTO)) return false;
         MatriculaDTO that = (MatriculaDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(alunoId, that.alunoId) &&
