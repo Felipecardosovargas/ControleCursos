@@ -73,7 +73,25 @@ public class AlunoController implements HttpHandler {
                     statusCode = 405; // Method Not Allowed
                     responseBody = "{\"error\":\"Method Not Allowed\"}";
                 }
-            } else if (path.matches("/api/alunos/\\d+")) { // e.g., /api/alunos/1
+            } else if (path.equals("/api/alunos/lote")) {
+            if ("POST".equalsIgnoreCase(method)) {
+                InputStream requestBody = exchange.getRequestBody();
+                List<AlunoDTO> alunos = JsonMapper.fromJsonList(
+                        new String(requestBody.readAllBytes(), StandardCharsets.UTF_8),
+                        AlunoDTO.class
+                );
+
+                for (AlunoDTO aluno : alunos) {
+                    alunoService.criarAluno(aluno.getNome(), aluno.getEmail(), aluno.getDataNascimento());
+                }
+
+                responseBody = "{\"message\":\"Alunos cadastrados com sucesso.\"}";
+                statusCode = 201;
+            } else {
+                statusCode = 405;
+                responseBody = "{\"error\":\"Method Not Allowed\"}";
+            }
+        } else if (path.matches("/api/alunos/\\d+")) { // e.g., /api/alunos/1
                 Long id = Long.parseLong(path.substring(path.lastIndexOf('/') + 1));
                 if ("GET".equalsIgnoreCase(method)) {
                     AlunoDTO aluno = alunoService.buscarAlunoPorId(id);
