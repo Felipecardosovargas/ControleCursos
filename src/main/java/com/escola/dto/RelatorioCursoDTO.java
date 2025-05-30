@@ -3,38 +3,39 @@ package com.escola.dto;
 import java.util.Objects;
 
 /**
- * Data Transfer Object for representing aggregated engagement report data for a course.
- * This includes total enrolled students, average student age, and the number of
- * students enrolled in a recent period (e.g., last 30 days).
- * This class is declared as final as it is a simple data carrier.
+ * DTO que representa dados agregados de engajamento de um curso.
+ * Inclui total de alunos, média de idade e novos alunos nos últimos 30 dias.
+ * Imutável e seguro para uso em múltiplas threads.
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @author FelipeCardoso
+ * @version 2.0
  */
 public final class RelatorioCursoDTO {
 
     private final String cursoNome;
     private final long totalAlunosMatriculados;
-    private final double mediaIdadeAlunos; // Using double for average
+    private final double mediaIdadeAlunos;
     private final long novosAlunosUltimos30Dias;
 
     /**
-     * Constructs a RelatorioCursoDTO.
+     * Construtor principal.
      *
-     * @param cursoNome The name of the course.
-     * @param totalAlunosMatriculados The total number of students enrolled in the course.
-     * @param mediaIdadeAlunos The average age of students enrolled in the course.
-     * @param novosAlunosUltimos30Dias The number of students enrolled in the course in the last 30 days.
+     * @param cursoNome                 Nome do curso.
+     * @param totalAlunosMatriculados  Total de alunos matriculados no curso.
+     * @param mediaIdadeAlunos         Média de idade dos alunos.
+     * @param novosAlunosUltimos30Dias Alunos matriculados nos últimos 30 dias.
      */
-    public RelatorioCursoDTO(String cursoNome, long totalAlunosMatriculados, double mediaIdadeAlunos, long novosAlunosUltimos30Dias) {
+    public RelatorioCursoDTO(String cursoNome,
+                             long totalAlunosMatriculados,
+                             double mediaIdadeAlunos,
+                             long novosAlunosUltimos30Dias) {
         this.cursoNome = cursoNome;
         this.totalAlunosMatriculados = totalAlunosMatriculados;
         this.mediaIdadeAlunos = mediaIdadeAlunos;
         this.novosAlunosUltimos30Dias = novosAlunosUltimos30Dias;
     }
 
-    // Getters
-
+    // Getters apenas (imutável)
     public String getCursoNome() {
         return cursoNome;
     }
@@ -52,14 +53,13 @@ public final class RelatorioCursoDTO {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RelatorioCursoDTO that = (RelatorioCursoDTO) o;
-        return totalAlunosMatriculados == that.totalAlunosMatriculados &&
-                Double.compare(that.mediaIdadeAlunos, mediaIdadeAlunos) == 0 &&
-                novosAlunosUltimos30Dias == that.novosAlunosUltimos30Dias &&
-                Objects.equals(cursoNome, that.cursoNome);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof RelatorioCursoDTO other)) return false;
+        return totalAlunosMatriculados == other.totalAlunosMatriculados &&
+                Double.compare(mediaIdadeAlunos, other.mediaIdadeAlunos) == 0 &&
+                novosAlunosUltimos30Dias == other.novosAlunosUltimos30Dias &&
+                Objects.equals(cursoNome, other.cursoNome);
     }
 
     @Override
@@ -69,11 +69,9 @@ public final class RelatorioCursoDTO {
 
     @Override
     public String toString() {
-        return "RelatorioCursoDTO{" +
-                "cursoNome='" + cursoNome + '\'' +
-                ", totalAlunosMatriculados=" + totalAlunosMatriculados +
-                ", mediaIdadeAlunos=" + String.format("%.2f", mediaIdadeAlunos) + // Formatting for display
-                ", novosAlunosUltimos30Dias=" + novosAlunosUltimos30Dias +
-                '}';
+        return String.format(
+                "RelatorioCursoDTO[curso='%s', totalMatriculas=%d, mediaIdade=%.2f, novosUltimos30Dias=%d]",
+                cursoNome, totalAlunosMatriculados, mediaIdadeAlunos, novosAlunosUltimos30Dias
+        );
     }
 }

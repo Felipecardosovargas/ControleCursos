@@ -2,6 +2,7 @@ package com.escola;
 
 import com.escola.config.PersistenceManager;
 import com.escola.controller.HttpHandlerFactory;
+import com.escola.controller.RelatorioController;
 import com.escola.service.AlunoService;
 import com.escola.service.CursoService;
 import com.escola.service.MatriculaService;
@@ -99,6 +100,8 @@ public class MainApp {
             MatriculaService matriculaService,
             RelatorioService relatorioService) throws Exception {
 
+        RelatorioController relatorioController = new RelatorioController(relatorioService);
+
         HttpServer server = HttpServer.create(new InetSocketAddress(SERVER_PORT), 0);
         HttpHandlerFactory factory = new HttpHandlerFactory(
                 alunoService, cursoService, matriculaService, relatorioService);
@@ -107,6 +110,7 @@ public class MainApp {
         server.createContext("/api/alunos", factory.getAlunoHandler());
         server.createContext("/api/cursos", factory.getCursoHandler());
         server.createContext("/api/matriculas", factory.getMatriculaHandler());
+        server.createContext("/api/relatorios/engajamento", relatorioController.engajamentoHandler());
 
         // 2) Registra arquivos estáticos como último recurso
         server.createContext("/", exchange -> {

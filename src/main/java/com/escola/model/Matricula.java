@@ -34,8 +34,8 @@ public class Matricula {
      * The "aluno_id" column in the "matriculas" table will be the foreign key.
      * Cannot be null.
      */
-    @ManyToOne(fetch = FetchType.LAZY) // LAZY is good practice to avoid loading unnecessary data
-    @JoinColumn(name = "aluno_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 
     /**

@@ -8,12 +8,14 @@ import com.escola.repository.MatriculaRepository;
 import com.escola.repository.impl.CursoRepositoryImpl;
 import com.escola.repository.impl.MatriculaRepositoryImpl;
 import com.escola.service.RelatorioService;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RelatorioServiceImpl implements RelatorioService {
+
     private final MatriculaRepository matriculaRepository;
     private final CursoRepository cursoRepository;
 
@@ -40,30 +42,53 @@ public class RelatorioServiceImpl implements RelatorioService {
         for (Curso curso : cursos) {
             List<Matricula> matriculas = matriculaRepository.listarPorCursoId(curso.getId());
             long totalMatriculados = matriculas.size();
-            double mediaIdade = calcularMediaIdadeAlunos(matriculas);
-            long novosAlunos = contarNovosAlunosUltimos30Dias(matriculas);
+            double mediaIdade = calcularMediaIdade(matriculas);
+            long novosAlunos = contarNovosAlunosNosUltimosDias(matriculas, 30);
 
-            relatorios.add(criarRelatorioCursoDTO(curso.getNome(), totalMatriculados, mediaIdade, novosAlunos));
+            RelatorioCursoDTO relatorio = new RelatorioCursoDTO(curso.getNome(), totalMatriculados, mediaIdade, novosAlunos);
+            relatorios.add(relatorio);
         }
         return relatorios;
     }
 
-    private double calcularMediaIdadeAlunos(List<Matricula> matriculas) {
+    /**
+     * Calcula a média da idade dos alunos com base nas matrículas.
+     * @param matriculas lista de matrículas para cálculo
+     * @return média das idades ou 0 se lista vazia
+     */
+    private double calcularMediaIdade(List<Matricula> matriculas) {
         if (matriculas.isEmpty()) return 0.0;
+
         double somaIdades = matriculas.stream()
-                .mapToLong(m -> Period.between(m.getAluno().getDataNascimento(), LocalDate.now()).getYears())
+                .map(Matricula::getAluno)
+                .mapToInt(this::calcularIdade)
                 .sum();
+
         return somaIdades / matriculas.size();
     }
 
-    private long contarNovosAlunosUltimos30Dias(List<Matricula> matriculas) {
-        LocalDate trintaDiasAtras = LocalDate.now().minusDays(30);
-        return matriculas.stream()
-                .filter(m -> m.getDataMatricula().isAfter(trintaDiasAtras))
-                .count();
+    /**
+     * Calcula a idade de um aluno a partir da data de nascimento.
+     * @param aluno objeto aluno com data de nascimento
+     * @return idade em anos, ou 0 se data de nascimento for nula
+     */
+    private int calcularIdade(com.escola.model.Aluno aluno) {
+        LocalDate nascimento = aluno.getDataNascimento();
+        if (nascimento == null) return 0;
+
+        return Period.between(nascimento, LocalDate.now()).getYears();
     }
 
-    private RelatorioCursoDTO criarRelatorioCursoDTO(String cursoNome, long totalMatriculados, double mediaIdade, long novosAlunos) {
-        return new RelatorioCursoDTO(cursoNome, totalMatriculados, mediaIdade, novosAlunos);
+    /**
+     * Conta quantos alunos se matricularam nos últimos X dias.
+     * @param matriculas lista de matrículas
+     * @param dias período em dias para considerar "novo aluno"
+     * @return quantidade de novos alunos
+     */
+    private long contarNovosAlunosNosUltimosDias(List<Matricula> matriculas, int dias) {
+        LocalDate dataLimite = LocalDate.now().minusDays(dias);
+        return matriculas.stream()
+                .filter(m -> m.getDataMatricula() != null && m.getDataMatricula().isAfter(dataLimite))
+                .count();
     }
 }
