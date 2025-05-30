@@ -2,22 +2,16 @@ package com.escola.dto;
 
 import com.escola.model.Matricula;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Data Transfer Object (DTO) representing an Enrollment (Matricula).
- *
+ * Data Transfer Object (DTO) que representa uma matrícula entre aluno e curso.
  * <p>
- * Este DTO encapsula os dados de uma matrícula entre aluno e curso,
- * facilitando o transporte de dados entre as camadas da aplicação
- * sem expor diretamente as entidades do domínio.
- * </p>
- *
- * <p>
- * Contém dados desnormalizados como nome do aluno e nome do curso para facilitar
- * exibição em camadas de apresentação.
+ * Facilita o transporte de dados entre camadas, encapsulando informações relevantes
+ * sem expor diretamente entidades de domínio. Contém dados desnormalizados para exibição.
  * </p>
  *
  * <p><b>Exemplo de uso:</b></p>
@@ -26,10 +20,13 @@ import java.util.Objects;
  * }</pre>
  *
  * @author SeuNome
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 public class MatriculaDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private Long alunoId;
@@ -37,36 +34,41 @@ public class MatriculaDTO implements Serializable {
     private Long cursoId;
     private String cursoNome;
     private LocalDate dataMatricula;
+    private boolean cancelada;
 
     /**
-     * Construtor padrão sem argumentos.
+     * Construtor padrão.
      */
     public MatriculaDTO() {
     }
 
     /**
-     * Construtor com todos os atributos.
+     * Construtor completo.
      *
-     * @param id            Identificador único da matrícula.
-     * @param alunoId       Identificador do aluno.
-     * @param alunoNome     Nome completo do aluno.
-     * @param cursoId       Identificador do curso.
-     * @param cursoNome     Nome do curso.
-     * @param dataMatricula Data em que a matrícula foi realizada.
+     * @param id             ID da matrícula.
+     * @param alunoId        ID do aluno.
+     * @param alunoNome      Nome do aluno.
+     * @param cursoId        ID do curso.
+     * @param cursoNome      Nome do curso.
+     * @param dataMatricula  Data da matrícula.
+     * @param cancelada      Flag indicando se a matrícula está cancelada.
      */
-    public MatriculaDTO(Long id, Long alunoId, String alunoNome, Long cursoId, String cursoNome, LocalDate dataMatricula) {
+    public MatriculaDTO(Long id, Long alunoId, String alunoNome,
+                        Long cursoId, String cursoNome,
+                        LocalDate dataMatricula, boolean cancelada) {
         this.id = id;
         this.alunoId = alunoId;
         this.alunoNome = alunoNome;
         this.cursoId = cursoId;
         this.cursoNome = cursoNome;
         this.dataMatricula = dataMatricula;
+        this.cancelada = cancelada;
     }
 
     /**
-     * Constrói uma instância de {@code MatriculaDTO} com base na entidade {@link Matricula}.
+     * Construtor baseado na entidade {@link Matricula}.
      *
-     * @param matricula Entidade de matrícula do domínio.
+     * @param matricula Instância da entidade de domínio.
      */
     public MatriculaDTO(Matricula matricula) {
         this.id = matricula.getId();
@@ -75,6 +77,10 @@ public class MatriculaDTO implements Serializable {
         this.cursoId = matricula.getCurso().getId();
         this.cursoNome = matricula.getCurso().getNome();
         this.dataMatricula = matricula.getDataMatricula();
+        this.cancelada = matricula.isCancelada(); // Supondo que tenha este método
+    }
+
+    public MatriculaDTO(Long id, Long id1, String nome, Long id2, String nome1, LocalDate dataMatricula) {
     }
 
     // === Getters e Setters ===
@@ -127,6 +133,14 @@ public class MatriculaDTO implements Serializable {
         this.dataMatricula = dataMatricula;
     }
 
+    public boolean isCancelada() {
+        return cancelada;
+    }
+
+    public void setCancelada(boolean cancelada) {
+        this.cancelada = cancelada;
+    }
+
     // === equals, hashCode e toString ===
 
     @Override
@@ -134,7 +148,8 @@ public class MatriculaDTO implements Serializable {
         if (this == o) return true;
         if (!(o instanceof MatriculaDTO)) return false;
         MatriculaDTO that = (MatriculaDTO) o;
-        return Objects.equals(id, that.id) &&
+        return cancelada == that.cancelada &&
+                Objects.equals(id, that.id) &&
                 Objects.equals(alunoId, that.alunoId) &&
                 Objects.equals(alunoNome, that.alunoNome) &&
                 Objects.equals(cursoId, that.cursoId) &&
@@ -144,7 +159,7 @@ public class MatriculaDTO implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, alunoId, alunoNome, cursoId, cursoNome, dataMatricula);
+        return Objects.hash(id, alunoId, alunoNome, cursoId, cursoNome, dataMatricula, cancelada);
     }
 
     @Override
@@ -156,6 +171,7 @@ public class MatriculaDTO implements Serializable {
                 ", cursoId=" + cursoId +
                 ", cursoNome='" + cursoNome + '\'' +
                 ", dataMatricula=" + dataMatricula +
+                ", cancelada=" + cancelada +
                 '}';
     }
 }

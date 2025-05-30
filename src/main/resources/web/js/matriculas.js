@@ -100,18 +100,21 @@ async function listarMatriculas() {
             return;
         }
 
-        matriculas.forEach(({ id, alunoNome, cursoNome, dataMatricula }) => {
-            // dataMatricula é um array [ano, mes, dia], monte uma data JS:
+        matriculas.forEach(({ id, alunoNome, cursoNome, dataMatricula, cancelada }) => {
             const data = new Date(dataMatricula[0], dataMatricula[1] - 1, dataMatricula[2]);
+            const status = cancelada ? 'Cancelada' : 'Ativa';
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${id}</td>
-                <td>${alunoNome}</td>
-                <td>${cursoNome}</td>
-                <td>${data.toLocaleDateString()}</td>
-                <td><button class="btn btn-small btn-delete" data-id="${id}">Cancelar</button></td>
-            `;
+        <td>${id}</td>
+        <td>${alunoNome}</td>
+        <td>${cursoNome}</td>
+        <td>${data.toLocaleDateString()}</td>
+        <td>${status}</td>
+        <td>
+            ${!cancelada ? `<button class="btn btn-small btn-delete" data-id="${id}">Cancelar</button>` : '-'}
+        </td>
+    `;
             tbody.appendChild(tr);
         });
 

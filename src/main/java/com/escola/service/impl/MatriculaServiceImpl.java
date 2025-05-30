@@ -221,7 +221,8 @@ public final class MatriculaServiceImpl implements MatriculaService {
                 Optional.ofNullable(matricula.getAluno()).map(Aluno::getNome).orElse(null),
                 Optional.ofNullable(matricula.getCurso()).map(Curso::getId).orElse(null),
                 Optional.ofNullable(matricula.getCurso()).map(Curso::getNome).orElse(null),
-                matricula.getDataMatricula()
+                matricula.getDataMatricula(),
+                matricula.isCancelada() // assumindo que exista esse método boolean na entidade Matricula
         );
     }
 }
