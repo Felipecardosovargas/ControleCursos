@@ -17,7 +17,7 @@ package com.escola.exception;
  * @version 1.1
  * @author SeuNomeAqui
  */
-public class OperacaoInvalidaException extends RuntimeException { // Alterado de Exception para RuntimeException
+public class OperacaoInvalidaException extends RuntimeException {
 
   /**
    * Constructs a new OperacaoInvalidaException with the specified detail message.
