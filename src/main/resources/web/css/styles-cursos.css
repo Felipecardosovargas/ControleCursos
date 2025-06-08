@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Archivo", sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+    height: 1024px;
+}
+
+.navbar {
+    width: 100%;
+    padding: 24px 40px;
+    background-color: #333666;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo-shapes {
+    display: flex;
+    gap: 4px;
+}
+
+.shape {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+.shape1 { width: 1.5px; height: 9.59px; background: #B2C1C0; }
+.shape2 { width: 41.94px; height: 23.96px; background: #E5DEC1; }
+.shape3 { width: 47.92px; height: 7.49px; background: #D33B23; }
+.shape4 { width: 5.99px; height: 11.98px; background: #D6EEF0; }
+/* ...adicione o resto conforme necessário */
+
+.logo-text .title {
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 30px;
+}
+
+.logo-text .subtitle {
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    line-height: 24px;
+}
+
+.navbar-right span {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 24px;
+    cursor: pointer;
+}
+
+.form-container {
+    width: 420px;
+    margin: 0 auto;
+    margin-top: 314px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    align-items: center;
+}
+
+.form-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333666;
+    text-align: center;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
+
+.form-fields input,
+.form-fields textarea {
+    width: 100%;
+    padding: 16px 12px;
+    background: #f6f6f6;
+    border-radius: 8px;
+    border: 1px solid #292929;
+    font-size: 16px;
+}
+
+.form-fields textarea {
+    height: 120px;
+    resize: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    flex: 1;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.primary {
+    background-color: #333666;
+}
+
+.btn.danger {
+    background-color: #663333;
+}
