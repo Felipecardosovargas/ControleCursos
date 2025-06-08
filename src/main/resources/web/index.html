@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Sistema de Cursos</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>EduSight - Painel de Atividades</title>
+    <link rel="stylesheet" href="css/styles-relatorio.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<h1>Sistema de Controle de Cursos</h1>
-<nav>
-    <ul>
-        <li><a href="alunos.html">Gerenciar Alunos</a></li>
-        <li><a href="cursos.html">Gerenciar Cursos</a></li>
-        <li><a href="matriculas.html">Gerenciar Matrículas</a></li>
-        <li><a href="relatorio.html">Relatorio</a></li>
-    </ul>
-</nav>
-<script src="js/app.js"></script>
+<header class="navbar">
+    <div class="navbar-left">
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+        <div class="logo-text">
+            <div class="logo-title">EDUSIGHT</div>
+            <div class="logo-subtitle">Educação + Insight</div>
+        </div>
+    </div>
+    <nav class="navbar-menu">
+        <a href="alunos.html">Alunos</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="matriculas.html">Matrículas</a>
+    </nav>
+</header>
+
+<main class="dashboard">
+    <h1 class="dashboard-title">Painel de Atividades da Plataforma</h1>
+    <p class="dashboard-desc">Acompanhe os principais indicadores de desempenho dos cursos, alunos e matrículas.</p>
+
+    <div id="carregando" style="text-align:center; margin-top: 10px; display: none;">Carregando...</div>
+    <div id="mensagem-erro" style="text-align:center; margin-top: 10px;"></div>
+
+    <div class="cards-container">
+        <div class="card"><h3>Matrículas por Curso</h3><canvas id="chartMatriculas"></canvas></div>
+        <div class="card"><h3>Média de Idade por Curso</h3><canvas id="chartMediaIdade"></canvas></div>
+        <div class="card"><h3>Novos Alunos (30 dias)</h3><canvas id="chartNovosAlunos"></canvas></div>
+
+        <div class="card"><h3>Distribuição de Matrículas</h3><canvas id="chartDistribuicaoMatriculas"></canvas></div>
+        <div class="card"><h3>Novos Alunos por Curso</h3><canvas id="chartLinhaNovosAlunos"></canvas></div>
+        <div class="card"><h3>Radar Comparativo</h3><canvas id="chartRadarComparativo"></canvas></div>
+    </div>
+</main>
+<script type="module" src="/js/scripts.js"></script>
+<script type="module" src="/js/relatorio.js"></script>
 </body>
 </html>
-
