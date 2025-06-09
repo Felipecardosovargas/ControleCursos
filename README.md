@@ -4,6 +4,10 @@
 
 # ControleCursos — Course Management System
 
+<p align="center">
+  <img src="https://github.com/Felipecardosovargas/ControleCursos/blob/main/Thumbnail.png" alt="3035tech Project Thumbnail" width="1000"/>
+</p>
+
 **Project developed as part of the full-stack training program by 3035tech.**
 
 ## Overview
@@ -23,6 +27,16 @@ Designed with clear separation of concerns and architectural best practices, thi
 - Search functionality (e.g., find student by email, search courses by name)
 - Enrollment listing with relational data display (student and course names)
 
+## UI Prototype (Figma)
+
+This project also includes a basic front-end prototype designed using **Figma**, focused on student registration and data visualization.
+
+- The prototype uses a lightweight HTML/JS interface.
+- It integrates [Chart.js](https://www.chartjs.org/) via CDN for data visualization.
+
+> Figma Design Link:  
+> [🎨 EduSight - Student Registration (Figma)](https://www.figma.com/design/DoIPJ51PHbHGIKqiaOL13M/EduSight--CadastroDeAlunos-?m=auto&t=p8ymrjHTXpup5Q5m-1)
+
 ## Architecture & Design
 
 - **Layered Architecture** (Controller → Service → Repository → Database)
@@ -32,7 +46,7 @@ Designed with clear separation of concerns and architectural best practices, thi
 - Avoidance of anti-patterns by keeping each layer focused on its responsibility
 - Emphasis on delivering business value through clean, maintainable, and testable code
 
-## Bonus Challenge (Optional)
+## Bonus Challenge
 
 Implemented an advanced **Engagement Report** for each course, displaying:
 
@@ -51,15 +65,15 @@ Implemented an advanced **Engagement Report** for each course, displaying:
 
 ## Future Improvements and Roadmap
 
-- **Implement user cardinality and roles** for better user management and permissions, reorganizing domain models accordingly
-- **Migrate backend to Spring Boot** to leverage modern dependency injection, security, REST APIs, and better modularization
-- **Develop and release an SDK** for API consumption, compatible with multiple programming languages and frameworks, potentially containerized with Docker for ease of deployment
+- **Implement user cardinality and roles** for better user management and permissions
+- **Migrate backend to Spring Boot** for modern dependency injection, REST APIs, and better modularization
+- **Develop and release an SDK** for API consumption (multi-language support), potentially Dockerized
 - **Build a modern frontend** using:
-  - **Angular + Sparta UI** for a consistent and accessible UI component library, or
-  - **React + Tailwind CSS + shadcn/ui** for a flexible, highly customizable interface with modern styling and components
+  - **Angular + Sparta UI**, or
+  - **React + Tailwind CSS + shadcn/ui**
 - Implement OAuth2 and JWT-based authentication and authorization
-- Add API documentation with Swagger / OpenAPI for seamless integration
-- Introduce automated testing, CI/CD pipelines, and container orchestration for production readiness
+- Add API documentation with Swagger / OpenAPI
+- Introduce automated testing, CI/CD pipelines, and Docker-based deployments
 
 ## Getting Started
 
