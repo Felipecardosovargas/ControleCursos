@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSight - Matrículas Cadastradas</title>
+    <link rel="stylesheet" href="css/styles-matriculas.css" />
+</head>
+<body>
+<div class="container">
+    <!-- Navbar -->
+    <a href="index.html" class="header-link">
+        <header class="navbar">
+            <div class="navbar-left">
+                <img src="assets/logo.png" alt="Logo da EduSight" class="logo" />
+                <div class="logo-text">
+                    <div class="logo-title">EDUSIGHT</div>
+                    <div class="logo-subtitle">Educação + Insight</div>
+                </div>
+            </div>
+            <nav class="navbar-menu">
+                <a href="index.html" class="menu-item">Relatório</a>
+                <a href="curso-cadastro.html" class="menu-item">Cursos</a>
+                <a href="aluno-cadastro.html" class="menu-item">Alunos</a>
+            </nav>
+        </header>
+    </a>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <h1 class="title">Matriculas <span class="highlight">Cadastradas</span></h1>
+
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Aluno</th>
+                    <th>Curso</th>
+                    <th>Data da matrícula</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody id="tabelaMatriculasBody">
+                <!-- Linhas preenchidas via JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions-footer">
+            <a href="matricula-cadastro.html" class="btn btn-primary">Matricular novo aluno</a>
+        </div>
+    </main>
+</div>
+
+<script src="js/matriculas-lista.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSight - Cursos Cadastrados</title>
+    <link rel="stylesheet" href="css/styles-cursos.css" />
+</head>
+<body>
+<div class="container">
+    <!-- Navbar -->
+    <a href="index.html" class="header-link">
+        <header class="navbar">
+            <div class="navbar-left">
+                <img src="assets/logo.png" alt="Logo da EduSight" class="logo" />
+                <div class="logo-text">
+                    <div class="logo-title">EDUSIGHT</div>
+                    <div class="logo-subtitle">Educação + Insight</div>
+                </div>
+            </div>
+            <nav class="navbar-menu">
+                <a href="index.html" class="menu-item">Relatório</a>
+                <a href="aluno-cadastro.html" class="menu-item">Alunos</a>
+                <a href="matricula-cadastro.html" class="menu-item">Matrículas</a>
+            </nav>
+        </header>
+    </a>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <h1 class="title">Cursos <span class="highlight">Cadastrados</span></h1>
+
+            <table class="custom-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Curso</th>
+                    <th>Descrição</th>
+                    <th>Carga Horária</th>
+                </tr>
+                </thead>
+                <tbody id="tabelaCursos">
+                <!-- Linhas preenchidas via JS -->
+                </tbody>
+            </table>
+
+        <div id="listaCursosMsg" class="message" role="alert" aria-live="polite"></div>
+
+        <div class="actions-footer">
+            <a href="curso-cadastro.html" class="btn btn-primary">Cadastrar novo curso</a>
+        </div>
+    </main>
+</div>
+<script src="js/cursos-lista.js"></script>
+</body>
+</html>

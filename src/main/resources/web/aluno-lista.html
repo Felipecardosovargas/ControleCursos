@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSight - Alunos Cadastrados</title>
+    <link rel="stylesheet" href="css/styles-alunos.css" />
+</head>
+<body>
+<div class="container">
+    <!-- Navbar -->
+    <a href="index.html" class="header-link">
+        <header class="navbar">
+            <div class="navbar-left">
+                <img src="assets/logo.png" alt="Logo da EduSight" class="logo" />
+                <div class="logo-text">
+                    <div class="logo-title">EDUSIGHT</div>
+                    <div class="logo-subtitle">Educação + Insight</div>
+                </div>
+            </div>
+            <nav class="navbar-menu">
+                <a href="index.html" class="menu-item">Relatório</a>
+                <a href="curso-cadastro.html" class="menu-item">Cursos</a>
+                <a href="matricula-cadastro.html" class="menu-item">Matrículas</a>
+            </nav>
+        </header>
+    </a>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <h1 class="title">Alunos <span class="highlight">Cadastrados</span></h1>
+
+        <table class="custom-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Data de Nascimento</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody id="tabelaAlunos">
+            <!-- Alunos inseridos via JS -->
+            </tbody>
+        </table>
+
+        <div id="listaAlunosMsg" class="message" role="alert" aria-live="polite"></div>
+
+        <div class="actions-footer">
+            <a href="aluno-cadastro.html" class="btn btn-secondary">Cadastrar novo aluno</a>
+        </div>
+    </main>
+</div>
+
+<script src="js/alunos-lista.js"></script>
+</body>
+</html>
