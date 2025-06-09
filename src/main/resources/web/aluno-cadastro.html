@@ -1,39 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSight - Aluno</title>
-    <link rel="stylesheet" href="css/styles-alunos.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduSight - Cadastrar Aluno</title>
+    <link rel="stylesheet" href="css/styles-alunos.css" />
 </head>
 <body>
-<header class="navbar">
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-    <div class="navbar-left">
-        <div class="logo-icon"></div>
-        <div class="logo-texts">
-            <div class="logo-main">EduSight</div>
-            <div class="logo-sub">Educação + Insight</div>
+<!-- Navbar -->
+<a href="index.html" class="header-link">
+    <header class="navbar">
+        <div class="navbar-left">
+            <img src="assets/logo.png" alt="Logo da EduSight" class="logo" />
+            <div class="logo-text">
+                <div class="logo-title">EDUSIGHT</div>
+                <div class="logo-subtitle">Educação + Insight</div>
+            </div>
         </div>
-    </div>
-    <nav class="navbar-links">
-        <a href="#">Alunos</a>
-        <a href="#">Cursos</a>
-        <a href="#">Matrículas</a>
-    </nav>
-</header>
+        <nav class="navbar-menu">
+            <a href="index.html" class="menu-item">Relatório</a>
+            <a href="curso-cadastro.html" class="menu-item">Cursos</a>
+            <a href="matricula-cadastro.html" class="menu-item">Matrículas</a>
+        </nav>
+    </header>
+</a>
 
+<!-- Conteúdo Principal -->
 <main class="form-container">
-    <h1 class="form-title">Aluno</h1>
-    <form class="form">
-        <div class="form-group">Nome</div>
-        <div class="form-group">E-mail</div>
-        <div class="form-group">Data de Nascimento</div>
-        <div class="form-actions">
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
-            <button class="btn btn-secondary" type="button">Cancelar</button>
+    <h1 class="form-title">Cadastrar Novo Aluno</h1>
+
+    <form id="cadastroAlunoForm" class="form" aria-describedby="formAlunoMsg" novalidate>
+        <div class="form-fields">
+            <div class="form-group">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" required placeholder="Digite o nome do aluno" />
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com" />
+            </div>
+
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required max="" />
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn primary">Salvar Aluno</button>
+            <a href="aluno-lista.html" class="btn danger" role="button">Alunos cadastrados</a>
         </div>
     </form>
+
+    <div id="formAlunoMsg" role="alert" aria-live="polite" class="message"></div>
 </main>
+
+<script src="js/alunos.js"></script>
 </body>
 </html>

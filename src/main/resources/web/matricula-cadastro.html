@@ -8,36 +8,49 @@
 </head>
 <body>
 <div class="container">
-    <header class="navbar">
-        <div class="navbar-left">
-            <img src="assets/logo.png" alt="Logo" class="logo" />
-            <div class="logo-text">
-                <div class="logo-title">EDUSIGHT</div>
-                <div class="logo-subtitle">Educação + Insight</div>
+    <!-- Navbar -->
+    <a href="index.html" class="header-link">
+        <header class="navbar">
+            <div class="navbar-left">
+                <img src="assets/logo.png" alt="Logo da EduSight" class="logo" />
+                <div class="logo-text">
+                    <div class="logo-title">EDUSIGHT</div>
+                    <div class="logo-subtitle">Educação + Insight</div>
+                </div>
             </div>
-        </div>
-        <nav class="navbar-menu">
-            <a href="#" class="menu-item">Alunos</a>
-            <a href="#" class="menu-item">Cursos</a>
-            <a href="#" class="menu-item">Matrículas</a>
-        </nav>
-    </header>
+            <nav class="navbar-menu">
+                <a href="index.html" class="menu-item">Relatório</a>
+                <a href="curso-cadastro.html" class="menu-item">Cursos</a>
+                <a href="aluno-cadastro.html" class="menu-item">Alunos</a>
+            </nav>
+        </header>
+    </a>
 
+    <!-- Conteúdo Principal -->
     <main class="main-content">
-        <h1 class="title">Cadastrar Nova<br>Matrícula</h1>
-        <form class="form">
-            <select class="select" required>
+        <h1 class="title">Cadastrar Nova<br><span class="highlight">Matrícula</span></h1>
+
+        <form id="cadastroMatriculaForm" class="form" novalidate>
+            <select id="selectAluno" name="alunoId" class="select" required>
                 <option selected disabled>Selecione um aluno</option>
+                <!-- Preenchido via JS -->
             </select>
-            <select class="select" required>
+
+            <select id="selectCurso" name="cursoId" class="select" required>
                 <option selected disabled>Selecione um curso</option>
+                <!-- Preenchido via JS -->
             </select>
+
             <div class="buttons">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
-                <button type="button" class="btn btn-secondary">Cursos cadastrados</button>
+                <a href="matricula-lista.html" class="btn btn-secondary">Ver Matrículas</a>
             </div>
+
+            <div id="formMatriculaMsg" role="alert" aria-live="polite" class="message"></div>
         </form>
     </main>
 </div>
+
+<script src="js/matriculas.js"></script>
 </body>
 </html>
