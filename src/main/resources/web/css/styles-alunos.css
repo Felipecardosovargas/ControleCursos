@@ -1,3 +1,4 @@
+/* Reset e base */
 * {
     margin: 0;
     padding: 0;
@@ -10,94 +11,144 @@ body {
     color: #000;
 }
 
+.actions-footer {
+    margin: 32px auto;
+    display: flex;
+    justify-content: center;
+}
+
+#listaAlunosMsg {
+    margin-top: 24px;
+}
+
+/* Navbar */
 .navbar {
-    background-color: #333666;
-    padding: 24px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #2c2c5d;
+    padding: 1rem 2rem;
+    color: white;
+}
+
+.header-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-link:hover {
+    cursor: pointer;
 }
 
 .navbar-left {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 1rem;
 }
 
-.logo-icon {
-    width: 50px;
+.logo {
+    width: 40px;
     height: 40px;
-    background-color: #E5DEC1;
-    border-radius: 4px;
 }
 
-.logo-texts {
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-main {
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: 3px;
+.logo-text .logo-title {
+    font-weight: bold;
+    font-size: 1rem;
     text-transform: uppercase;
-    color: white;
 }
 
-.logo-sub {
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    color: white;
+.title {
+    margin: 20px;
 }
 
-.navbar-links a {
+.logo-text .logo-subtitle {
+    font-size: 0.8rem;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.menu-item {
     color: white;
-    font-weight: 500;
-    font-size: 16px;
     text-decoration: none;
-    margin-left: 24px;
+    font-size: 0.9rem;
 }
 
+.menu-item:hover,
+.menu-item.active {
+    text-decoration: underline;
+}
+
+/* Container principal do formulário */
 .form-container {
-    width: 420px;
-    margin: 100px auto;
+    width: 100%;
+    max-width: 480px;
+    margin: 200px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 44px;
+    padding: 0 16px;
+    gap: 32px;
 }
 
 .form-title {
     color: #333666;
-    font-size: 36px;
+    font-size: 32px;
     font-family: 'Archivo', sans-serif;
     font-weight: 700;
+    text-align: center;
 }
 
+/* Formulário */
 .form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 24px;
 }
 
-.form-group {
-    background: #F6F6F6;
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 12px;
     border: 1px solid #292929;
     border-radius: 8px;
-    padding: 16px 12px;
+    background: #F6F6F6;
     font-size: 16px;
     font-family: 'Archivo', sans-serif;
+    transition: border-color 0.2s;
 }
 
-.form-actions {
+.form-group input:focus {
+    border-color: #333666;
+    outline: none;
+}
+
+/* Botões */
+.form-buttons {
     display: flex;
     gap: 12px;
 }
 
 .btn {
     flex: 1;
-    padding: 16px;
+    padding: 14px;
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -105,12 +156,180 @@ body {
     font-weight: 700;
     color: white;
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 }
 
-.btn-primary {
+.btn.primary {
     background-color: #333666;
 }
 
 .btn-secondary {
-    background-color: #663333;
+    background-color: #2c2c5d;
+}
+
+.btn-secondary {
+    background-color: #2c2c5d;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding: 12px 24px;
+    width: max-content;
+}
+
+.btn-secondary:hover {
+    opacity: 0.85;
+}
+
+.btn.danger {
+    background-color: #6A2E2E;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-table .btn-secondary {
+    background-color: #2c2c5d;
+}
+
+/* Mensagens */
+.message {
+    margin-top: 12px;
+    padding: 12px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #4caf50;
+    border-radius: 6px;
+    display: none;
+}
+
+.message.error {
+    background-color: #e74c3c;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.table-container {
+    width: 100%;
+    max-width: 960px;
+    margin: 40px auto 0;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px; /* Espaço entre elementos, como botão ou mensagens */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    color: #2c2c5d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.custom-table thead {
+    background-color: #2e2d63;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.custom-table th {
+    font-weight: 700;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f1f1f7;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.custom-table td:last-child {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Botões dentro da tabela */
+.custom-table .btn {
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.custom-table .btn-secondary {
+    background-color: #2c2c5d;
+}
+
+.custom-table .btn-secondary:hover {
+    opacity: 0.85;
+}
+
+.custom-table .btn-danger {
+    background-color: #993333;
+}
+
+.custom-table .btn-danger:hover {
+    opacity: 0.85;
+}
+
+.message {
+    display: none;
+    width: 100%;
+    min-width: 300px;
+    max-width: 26.25rem;
+    padding: 1rem 0.75rem;
+    margin-top: 1rem;
+    font-size: 14px;
+    border-radius: 0.5rem;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 500;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sucesso */
+.message.sucesso {
+    display: flex;
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+/* Erro */
+.message.error {
+    display: flex;
+    background-color: #FEE2E2;
+    color: #991B1B;
 }

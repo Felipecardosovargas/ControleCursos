@@ -12,72 +12,134 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1440px;
     margin: 0 auto;
     position: relative;
-    height: 1024px;
+    /* sem display:flex */
 }
 
+
 .navbar {
-    width: 100%;
-    padding: 24px 40px;
-    background-color: #333666;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #2c2c5d;
+    padding: 1rem 2rem;
+    color: white;
+}
+
+.header-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-link:hover {
+    cursor: pointer;
 }
 
 .navbar-left {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 1rem;
 }
 
-.logo-shapes {
-    display: flex;
-    gap: 4px;
+.logo {
+    width: 40px;
+    height: 40px;
 }
 
-.shape {
-    background-color: #ccc;
-    border-radius: 2px;
-}
-
-.shape1 { width: 1.5px; height: 9.59px; background: #B2C1C0; }
-.shape2 { width: 41.94px; height: 23.96px; background: #E5DEC1; }
-.shape3 { width: 47.92px; height: 7.49px; background: #D33B23; }
-.shape4 { width: 5.99px; height: 11.98px; background: #D6EEF0; }
-/* ...adicione o resto conforme necessário */
-
-.logo-text .title {
-    color: white;
-    font-size: 16px;
-    font-weight: 800;
+.logo-text .logo-title {
+    font-weight: bold;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    line-height: 30px;
 }
 
-.logo-text .subtitle {
-    color: white;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 2.5px;
-    line-height: 24px;
+.logo-text .logo-subtitle {
+    font-size: 0.8rem;
 }
 
-.navbar-right span {
+.navbar-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.menu-item {
     color: white;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 24px;
-    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c2c5d;
+    padding: 1rem 2rem;
+    color: white;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text .logo-title {
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.logo-text .logo-subtitle {
+    font-size: 0.8rem;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* alinha os elementos filhos horizontalmente */
+    justify-content: center; /* alinha verticalmente */
+    padding: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;      /* centraliza o texto dentro do container */
+}
+
+.title {
+    margin: 50px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #2c2c5d;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
 }
 
 .form-container {
     width: 420px;
-    margin: 0 auto;
-    margin-top: 314px;
+    margin: 200px auto 0;
     display: flex;
     flex-direction: column;
     gap: 44px;
@@ -127,6 +189,10 @@ body {
     color: white;
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    width: 100px;
 }
 
 .btn.primary {
@@ -136,3 +202,136 @@ body {
 .btn.danger {
     background-color: #663333;
 }
+
+/* Estilização da tabela */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.custom-table thead {
+    background-color: #f4f6f9;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e1e5ea;
+}
+
+.custom-table th {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    color: #2c2c5d;
+}
+
+.custom-table thead {
+    background-color: #2e2d63;
+    color: white;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: none;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #D9D9DC;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.message {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #8f1d1d;
+    text-align: center;
+}
+
+.actions-footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#tabelaCursos {
+    background-color: #F6F6F6;
+}
+
+.actions-footer .btn {
+    flex: 1;
+    padding: 0.75rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    max-width: 200px;
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.actions-footer .btn-primary {
+    background-color: #2c2c5d;
+}
+
+.actions-footer .btn-primary:hover {
+    opacity: 0.9;
+}
+
+.actions-footer .btn-secondary {
+    background-color: #6a2e2e;
+}
+
+.actions-footer .btn-secondary:hover {
+    opacity: 0.9;
+}
+
+.message {
+    display: none;
+    width: 100%;
+    min-width: 300px;
+    max-width: 26.25rem;
+    padding: 1rem 0.75rem;
+    margin-top: 1rem;
+    font-size: 14px;
+    border-radius: 0.5rem;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 500;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sucesso */
+.message.sucesso {
+    display: flex;
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+/* Erro */
+.message.error {
+    display: flex;
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
