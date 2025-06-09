@@ -1,0 +1,16 @@
+<configuration debug="true"> <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -- %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>INFO</level>
+    </filter>
+</appender>
+
+    <root level="DEBUG"> <appender-ref ref="CONSOLE" />
+    </root>
+
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="com.escola.util.ConsoleUI" level="INFO"/>
+
+</configuration>
