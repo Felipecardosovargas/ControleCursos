@@ -5,58 +5,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const formCursoMsg = document.getElementById("formCursoMsg");
     const listaCursosMsg = document.getElementById("listaCursosMsg");
 
-    const API_BASE = "/api/cursos"; // URL base da sua API (ajuste se necessário)
+    const API_BASE = "/api/cursos";
 
-    // Exibe mensagens
     function mostrarMensagem(elemento, mensagem, sucesso = true) {
         if (!elemento) return;
+
         elemento.textContent = mensagem;
-        elemento.style.color = sucesso ? "green" : "red";
+        elemento.classList.remove("sucesso", "error");
+        elemento.classList.add(sucesso ? "sucesso" : "error");
+        elemento.style.display = "flex";
+
         setTimeout(() => {
             elemento.textContent = "";
-        }, 3000);
+            elemento.style.display = "none";
+        }, 4000);
     }
 
-    // Atualiza a tabela com os cursos recebidos
     function atualizarTabela(cursos) {
         if (!tabelaCursosBody) return;
 
         if (!cursos || cursos.length === 0) {
             tabelaCursosBody.innerHTML = `
-        <tr><td colspan="4" style="text-align:center;">Nenhum curso cadastrado.</td></tr>
-      `;
+                <tr><td colspan="4" style="text-align:center;">Nenhum curso cadastrado.</td></tr>
+            `;
             return;
         }
 
-        tabelaCursosBody.innerHTML = cursos
-            .map(
-                (curso) => `
-      <tr>
-        <td>${curso.id}</td>
-        <td>${curso.nome}</td>
-        <td>${curso.descricao}</td>
-        <td>${curso.cargaHoraria}</td>
-      </tr>
-    `
-            )
-            .join("");
+        tabelaCursosBody.innerHTML = cursos.map(curso => `
+            <tr>
+                <td>${curso.id}</td>
+                <td>${curso.nome}</td>
+                <td>${curso.descricao}</td>
+                <td>${curso.cargaHoraria}</td>
+            </tr>
+        `).join("");
     }
 
-    // Função para buscar cursos do backend
     async function listarCursos() {
         try {
             const response = await fetch(API_BASE);
             if (!response.ok) throw new Error("Erro ao buscar cursos.");
             const cursos = await response.json();
             atualizarTabela(cursos);
-            mostrarMensagem(listaCursosMsg, "Cursos listados com sucesso!");
+
+            // Exibe mensagem apenas se estiver na página curso-lista.html
+            if (window.location.pathname.includes("curso-lista.html")) {
+                mostrarMensagem(listaCursosMsg, "Cursos listados com sucesso!");
+            }
+
         } catch (error) {
             mostrarMensagem(listaCursosMsg, error.message, false);
             tabelaCursosBody.innerHTML = "";
         }
     }
 
-    // Evento para cadastro do curso no backend
     if (form) {
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
@@ -86,8 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 mostrarMensagem(formCursoMsg, "Curso salvo com sucesso!");
                 form.reset();
-
-                // Atualiza tabela para mostrar novo curso
                 listarCursos();
             } catch (error) {
                 mostrarMensagem(formCursoMsg, error.message, false);
@@ -95,13 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Evento para listar cursos ao clicar no botão
     if (btnListarCursos) {
-        btnListarCursos.addEventListener("click", () => {
-            listarCursos();
-        });
+        btnListarCursos.addEventListener("click", listarCursos);
     }
 
-    // Carregar lista ao abrir a página
     listarCursos();
 });
