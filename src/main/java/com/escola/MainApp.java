@@ -2,7 +2,6 @@ package com.escola;
 
 import com.escola.config.PersistenceManager;
 import com.escola.controller.HttpHandlerFactory;
-import com.escola.controller.RelatorioController;
 import com.escola.service.AlunoService;
 import com.escola.service.CursoService;
 import com.escola.service.MatriculaService;
@@ -78,8 +77,8 @@ public class MainApp {
 
         boolean running = true;
         while (running) {
-            ConsoleUI.exibirMenu("Escolha o modo de execução:", executionModes);
-            int choice = ConsoleUI.lerInteiro(""); // Use more descriptive variable name
+            ConsoleUI.displayMenu("Escolha o modo de execução:", executionModes);
+            int choice = ConsoleUI.readInt(""); // Use more descriptive variable name
             switch (choice) {
                 case 1:
                     try {
@@ -93,9 +92,8 @@ public class MainApp {
                         Thread.currentThread().interrupt(); // Restore interrupted status
                     }
                     break;
-                case 2:
-                    startConsoleUI(alunoService, cursoService, matriculaService, relatorioService);
-                    // After console UI exits, return to an initial menu
+                case 2:                    startConsoleUI(alunoService, cursoService, matriculaService, relatorioService);
+                    // After console UI exits, return to the initial menu
                     break;
                 case 3:
                     logger.info("Encerrando aplicação...");
@@ -116,7 +114,7 @@ public class MainApp {
             logger.info("Servidor HTTP parado.");
         }
         PersistenceManager.close();
-        ConsoleUI.fecharScanner();
+        ConsoleUI.closeScanner();
         logger.info("Aplicação encerrada.");
     }
 
@@ -214,7 +212,7 @@ public class MainApp {
                 httpServer.stop(5); // Stop gracefully within 5 seconds
             }
             PersistenceManager.close();
-            ConsoleUI.fecharScanner();
+            ConsoleUI.closeScanner();
             logger.info("Recursos liberados. Aplicação desligada.");
         }));
 
@@ -249,8 +247,8 @@ public class MainApp {
                     "Calcular Idade (Exemplo DateUtil)",
                     "Voltar ao menu principal"
             };
-            ConsoleUI.exibirMenu("Menu Principal - ConsoleUI", mainMenuOptions);
-            int choice = ConsoleUI.lerInteiro("");
+            ConsoleUI.displayMenu("Menu Principal - ConsoleUI", mainMenuOptions);
+            int choice = ConsoleUI.readInt("");
 
             switch (choice) {
                 case 1:
@@ -275,9 +273,9 @@ public class MainApp {
                     break;
                 case 5:
                     logger.info("Funcionalidade 'Calcular Idade' selecionada.");
-                    LocalDate birthDate = ConsoleUI.lerData("Informe a data de nascimento para calcular a idade");
+                    LocalDate birthDate = ConsoleUI.readDate("Informe a data de nascimento para calcular a idade");
                     try {
-                        int age = DateUtil.calcularIdade(birthDate);
+                        int age = DateUtil.calculateAge(birthDate);
                         System.out.println("Idade calculada: " + age + " anos.");
                     } catch (IllegalArgumentException e) {
                         logger.warn("Erro ao calcular idade: {}", e.getMessage());

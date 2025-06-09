@@ -15,7 +15,7 @@ package com.escola.exception;
  * </p>
  *
  * @version 1.1
- * @author SeuNomeAqui
+ * @author FelipeCardoso
  */
 public class OperacaoInvalidaException extends RuntimeException {
 

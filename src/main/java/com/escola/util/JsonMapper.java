@@ -1,7 +1,6 @@
 package com.escola.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -12,7 +11,8 @@ import java.util.List;
  * Utility class for JSON serialization and deserialization using Jackson.
  * This class is final as it only contains static utility methods.
  *
- * @version 1.0
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public final class JsonMapper {
     private static final ObjectMapper objectMapper = createObjectMapper();
