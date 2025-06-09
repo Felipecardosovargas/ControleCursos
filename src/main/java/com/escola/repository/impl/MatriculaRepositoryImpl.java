@@ -15,7 +15,8 @@ import java.util.Optional;
  * JPA implementation of the {@link MatriculaRepository}.
  * Handles the persistence operations for {@link Matricula} entities.
  *
- * @version 1.0
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class MatriculaRepositoryImpl implements MatriculaRepository {
 

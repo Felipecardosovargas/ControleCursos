@@ -1,4 +1,3 @@
-// src/main/java/com/escola/controller/MatriculaController.java
 package com.escola.controller;
 
 import com.escola.dto.ApiResponse;

@@ -90,18 +90,12 @@ public class CursoController implements HttpHandler {
         Map<String, HttpExchangeHandler> relatorioEngagementRoutes = new HashMap<>();
         relatorioEngagementRoutes.put("GET", this::handleGetRelatorioEngajamento);
         routes.put("/api/cursos/relatorio/engajamento", relatorioEngagementRoutes);
-
-        // Se você decidir usar a rota /api/cursos/nome/{nome} para busca exata por nome:
-        // Map<String, HttpExchangeHandler> cursosNomeRoutes = new HashMap<>();
-        // cursosNomeRoutes.put("GET", this::handleGetCursoByNome);
-        // routes.put(NOME_PATH_PATTERN.pattern(), cursosNomeRoutes);
     }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
-        // String query = exchange.getRequestURI().getQuery(); // Query params serão tratados nos handlers específicos
 
         // 1. CORS Preflight Handling (Sempre primeiro)
         addCorsHeaders(exchange);
@@ -216,7 +210,11 @@ public class CursoController implements HttpHandler {
             throw new ValidacaoException("Nome do curso e carga horária são obrigatórios e válidos.");
         }
 
-        CursoDTO createdCurso = cursoService.criarCurso(requestDTO.getNome(), requestDTO.getDescricao(), requestDTO.getCargaHoraria());
+        CursoDTO createdCurso = cursoService.criarCurso(
+                requestDTO.getNome(),
+                requestDTO.getDescricao(),
+                requestDTO.getCargaHoraria()
+        );
         sendResponse(exchange, JsonMapper.toJson(createdCurso), 201); // Created
     }
 
@@ -287,7 +285,12 @@ public class CursoController implements HttpHandler {
             throw new ValidacaoException("Carga horária deve ser um valor positivo.");
         }
 
-        CursoDTO updatedCurso = cursoService.atualizarCurso(id, requestDTO.getNome(), requestDTO.getDescricao(), requestDTO.getCargaHoraria());
+        CursoDTO updatedCurso = cursoService.atualizarCurso(
+                id,
+                requestDTO.getNome(),
+                requestDTO.getDescricao(),
+                requestDTO.getCargaHoraria()
+        );
         sendResponse(exchange, JsonMapper.toJson(updatedCurso), 200);
     }
 

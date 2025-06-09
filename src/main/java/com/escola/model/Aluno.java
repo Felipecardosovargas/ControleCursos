@@ -13,8 +13,8 @@ import java.util.Objects;
  * This entity is mapped to the "alunos" table in the database.
  * </p>
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 @Entity
 @Table(name = "alunos")

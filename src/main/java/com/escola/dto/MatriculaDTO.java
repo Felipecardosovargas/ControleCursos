@@ -19,9 +19,8 @@ import java.util.Objects;
  * MatriculaDTO dto = new MatriculaDTO(matricula);
  * }</pre>
  *
- * @author SeuNome
- * @version 1.2
- * @since 1.0
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class MatriculaDTO implements Serializable {
 

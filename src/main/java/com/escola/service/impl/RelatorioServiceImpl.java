@@ -14,26 +14,64 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the RelatorioService interface.
+ * This class provides business logic for generating various reports related to courses and enrollments,
+ * interacting with the repository layer to fetch necessary data.
+ * It aims to provide insights into course engagement, such as total students,
+ * average age, and recent enrollments.
+ *
+ * @version 1.1
+ * @author FelipeCardoso
+ */
 public class RelatorioServiceImpl implements RelatorioService {
 
     private final MatriculaRepository matriculaRepository;
     private final CursoRepository cursoRepository;
 
+    /**
+     * Constructs a new RelatorioServiceImpl with specified repository implementations.
+     * This constructor is primarily used for dependency injection, allowing for
+     * easier testing and more flexible application setup.
+     *
+     * @param matriculaRepository The repository for managing enrollment data.
+     * @param cursoRepository     The repository for managing course data.
+     */
     public RelatorioServiceImpl(MatriculaRepository matriculaRepository, CursoRepository cursoRepository) {
         this.matriculaRepository = matriculaRepository;
         this.cursoRepository = cursoRepository;
     }
 
+    /**
+     * Default constructor for RelatorioServiceImpl.
+     * It initializes the repositories with their default concrete implementations.
+     * This constructor is useful for simple standalone applications where
+     * manual dependency injection might be less common.
+     */
     public RelatorioServiceImpl() {
         this.matriculaRepository = new MatriculaRepositoryImpl();
         this.cursoRepository = new CursoRepositoryImpl();
     }
 
+    /**
+     * Constructs a new RelatorioServiceImpl, specifically allowing injection of
+     * a MatriculaRepositoryImpl instance while using the default CursoRepositoryImpl.
+     *
+     * @param matriculaRepository The specific MatriculaRepositoryImpl instance to use.
+     */
     public RelatorioServiceImpl(MatriculaRepositoryImpl matriculaRepository) {
         this.matriculaRepository = matriculaRepository;
         this.cursoRepository = new CursoRepositoryImpl();
     }
 
+    /**
+     * Generates a comprehensive report on course engagement.
+     * For each available course, this method calculates the total number of enrolled students,
+     * their average age, and the count of students who enrolled in the last 30 days.
+     *
+     * @return A {@link List} of {@link RelatorioCursoDTO}, each containing engagement
+     * statistics for a specific course. Returns an empty list if no courses are found.
+     */
     @Override
     public List<RelatorioCursoDTO> gerarRelatorioEngajamentoCursos() {
         List<RelatorioCursoDTO> relatorios = new ArrayList<>();
@@ -52,9 +90,11 @@ public class RelatorioServiceImpl implements RelatorioService {
     }
 
     /**
-     * Calcula a média da idade dos alunos com base nas matrículas.
-     * @param matriculas lista de matrículas para cálculo
-     * @return média das idades ou 0 se lista vazia
+     * Calculates the average age of students based on a provided list of enrollments.
+     * It extracts the associated student from each enrollment and computes their age.
+     *
+     * @param matriculas The list of {@link Matricula} objects (enrollments) to use for age calculation.
+     * @return The average age of students in years, or 0.0 if the input list is empty.
      */
     private double calcularMediaIdade(List<Matricula> matriculas) {
         if (matriculas.isEmpty()) return 0.0;
@@ -68,9 +108,11 @@ public class RelatorioServiceImpl implements RelatorioService {
     }
 
     /**
-     * Calcula a idade de um aluno a partir da data de nascimento.
-     * @param aluno objeto aluno com data de nascimento
-     * @return idade em anos, ou 0 se data de nascimento for nula
+     * Calculates the age of a student based on their birthdate.
+     * The age is determined by the period between the student's birthdate and the current date.
+     *
+     * @param aluno The {@link com.escola.model.Aluno} object containing the birthdate.
+     * @return The age of the student in years, or 0 if the birthdate is null.
      */
     private int calcularIdade(com.escola.model.Aluno aluno) {
         LocalDate nascimento = aluno.getDataNascimento();
@@ -80,10 +122,13 @@ public class RelatorioServiceImpl implements RelatorioService {
     }
 
     /**
-     * Conta quantos alunos se matricularam nos últimos X dias.
-     * @param matriculas lista de matrículas
-     * @param dias período em dias para considerar "novo aluno"
-     * @return quantidade de novos alunos
+     * Counts the number of students who enrolled within a specified number of recent days.
+     * It filters enrollments to include only those whose enrollment date falls within the defined period
+     * relative to the current date.
+     *
+     * @param matriculas The list of {@link Matricula} objects (enrollments) to check.
+     * @param dias The number of past days to consider an enrollment as "new".
+     * @return The count of new students enrolled within the specified period.
      */
     private long contarNovosAlunosNosUltimosDias(List<Matricula> matriculas, int dias) {
         LocalDate dataLimite = LocalDate.now().minusDays(dias);

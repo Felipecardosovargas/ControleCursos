@@ -19,8 +19,8 @@ import java.util.Optional;
  * This class manages database transactions for each operation.
  * </p>
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class AlunoRepositoryImpl implements AlunoRepository {
 

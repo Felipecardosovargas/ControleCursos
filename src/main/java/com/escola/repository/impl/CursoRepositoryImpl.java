@@ -17,8 +17,8 @@ import java.util.Optional;
  * Handles the persistence operations for {@link Curso} entities using
  * {@link EntityManager}.
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class CursoRepositoryImpl implements CursoRepository {
 

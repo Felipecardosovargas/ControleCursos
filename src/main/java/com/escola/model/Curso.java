@@ -13,7 +13,7 @@ import java.util.Objects;
  * </p>
  *
  * @version 1.0
- * @author SeuNomeAqui
+ * @author FelipeCardoso
  */
 @Entity
 @Table(name = "cursos")

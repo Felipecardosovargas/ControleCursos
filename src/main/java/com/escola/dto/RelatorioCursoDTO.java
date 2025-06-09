@@ -7,8 +7,8 @@ import java.util.Objects;
  * Inclui total de alunos, média de idade e novos alunos nos últimos 30 dias.
  * Imutável e seguro para uso em múltiplas threads.
  *
+ * @version 1.1
  * @author FelipeCardoso
- * @version 2.0
  */
 public final class RelatorioCursoDTO {
 

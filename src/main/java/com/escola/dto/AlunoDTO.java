@@ -7,7 +7,8 @@ import java.time.LocalDate;
  * This class is used to transfer student data between different layers of the application.
  * It follows the Single Responsibility Principle by only holding data and no business logic.
  *
- * @author
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class AlunoDTO {
 

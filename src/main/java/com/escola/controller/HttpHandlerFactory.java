@@ -127,11 +127,13 @@ public final class HttpHandlerFactory {
                     os.write(responseBytes);
                     os.flush(); // Ensure data is immediately sent
                 }
-                logger.debug("Sent 404 Not Found response for path: {}", exchange.getRequestURI().getPath());
+                logger.debug("Sent 404 Not Found response for path: {}",
+                        exchange.getRequestURI().getPath());
             } catch (IOException e) {
                 // This catch block handles errors *during* sending the 404 response.
                 // At this point, the connection might be broken, so logging is key.
-                logger.error("Error sending default 404 response for path {}: {}", exchange.getRequestURI().getPath(), e.getMessage(), e);
+                logger.error("Error sending default 404 response for path {}: {}",
+                        exchange.getRequestURI().getPath(), e.getMessage(), e);
             } finally {
                 // Crucial: Always close the exchange to free up resources.
                 exchange.close();

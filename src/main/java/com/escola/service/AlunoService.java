@@ -13,8 +13,8 @@ import java.util.List;
  * Defines business operations related to students, such as creation, retrieval,
  * updates, and deletion, including necessary validations.
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public interface AlunoService {
 

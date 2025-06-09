@@ -8,8 +8,8 @@ import java.util.Optional;
  * Interface for data access operations related to {@link Curso} entities.
  * Defines the contract for CRUD operations and custom queries for courses.
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public interface CursoRepository {
 

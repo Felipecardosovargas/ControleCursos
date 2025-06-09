@@ -7,8 +7,8 @@ import java.util.Objects;
  * Used to transfer course data between different layers of the application.
  * This class holds data and no business logic.
  *
- * @author SeuNomeAqui
- * @version 1.0
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class CursoDTO {
 

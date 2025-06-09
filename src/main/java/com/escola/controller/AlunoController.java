@@ -1,4 +1,3 @@
-// src/main/java/com/escola/controller/AlunoController.java
 package com.escola.controller;
 
 import com.escola.dto.AlunoDTO;

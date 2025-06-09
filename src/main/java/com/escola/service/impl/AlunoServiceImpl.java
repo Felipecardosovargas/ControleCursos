@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
  * Handles business logic for student management, coordinating with the
  * {@link AlunoRepository}.
  *
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class AlunoServiceImpl implements AlunoService {
 

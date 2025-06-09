@@ -9,8 +9,8 @@ import java.util.Objects;
  * <p>
  * Este objeto é usado principalmente em requisições HTTP para criar novas matrículas.
  *
- * @author SeuNome
- * @version 1.0
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public class MatriculaRequestDTO implements Serializable {
 

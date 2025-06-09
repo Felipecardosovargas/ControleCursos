@@ -9,8 +9,8 @@ import java.util.Objects;
  * This class is declared as final as it is a simple data carrier.
  *
  * @param <T> The type of the data payload.
- * @version 1.0
- * @author SeuNomeAqui
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public final class ApiResponse<T> {
 

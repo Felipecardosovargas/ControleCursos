@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
  * Implementação do serviço de matrícula.
  * Responsável por gerenciar operações relacionadas à entidade {@link Matricula}.
  *
- * @author Sistema
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public final class MatriculaServiceImpl implements MatriculaService {
 

@@ -8,6 +8,9 @@ import java.util.Optional;
 /**
  * Interface de repositório para operações com a entidade {@link Matricula}.
  * Foco em acesso a dados, sem regras de negócio.
+ *
+ * @version 1.1
+ * @author FelipeCardoso
  */
 public interface MatriculaRepository {
 
